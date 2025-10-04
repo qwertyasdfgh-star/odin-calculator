@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculator with History Modal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="calculator">
+    <button id="history-btn" title="Show History" aria-label="Show History" class="history-btn">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+    </button>
+
+    <div class="display-container">
+      <div class="previous-operation" id="previous-operation"></div>
+      <div class="current-display" id="current-display">0</div>
+    </div>
+
+<div class="buttons-grid">
+    <button data-type="clear" class="function-btn">C</button>
+    <button data-type="sign" class="function-btn">±</button>
+    <button data-type="percentage" class="function-btn">%</button>
+    <button data-type="operator" data-value="÷" class="operator-btn">÷</button>
+    
+    <button data-type="number" data-value="7" class="number-btn">7</button>
+    <button data-type="number" data-value="8" class="number-btn">8</button>
+    <button data-type="number" data-value="9" class="number-btn">9</button>
+    <button data-type="operator" data-value="×" class="operator-btn">×</button>
+    
+    <button data-type="number" data-value="4" class="number-btn">4</button>
+    <button data-type="number" data-value="5" class="number-btn">5</button>
+    <button data-type="number" data-value="6" class="number-btn">6</button>
+    <button data-type="operator" data-value="−" class="operator-btn">−</button>
+    
+    <button data-type="number" data-value="1" class="number-btn">1</button>
+    <button data-type="number" data-value="2" class="number-btn">2</button>
+    <button data-type="number" data-value="3" class="number-btn">3</button>
+    <button data-type="operator" data-value="+" class="operator-btn">+</button>
+    
+    <button data-type="number" data-value="0" class="number-btn zero-btn">0</button>
+    <button data-type="number" data-value="." class="number-btn">.</button>
+    <button data-type="equals" class="equals-btn">=</button>
+</div>
+  </div>
+
+  <!-- History Modal -->
+  <div id="history-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="history-title" aria-modal="true">
+    <div class="modal-content" role="document">
+      <header class="modal-header">
+        <h2 id="history-title">Calculation History</h2>
+        <button id="close-history" aria-label="Close History">&times;</button>
+      </header>
+      <div id="history-list" class="history-list">
+        <!-- History entries go here -->
+      </div>
+      <footer class="modal-footer">
+        <button id="clear-history-btn" class="function-btn">Clear History</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="./src/calculator.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    padding: 10px;
+    position: relative;
+  }
+  
+  .calculator {
+    border-radius: 15px;
+    padding: 15px;
+    overflow: hidden;
+    width: 320px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    position: relative;
+    background: linear-gradient(145deg, #1d1d1d, #171717);
+    border: 1px solid rgba(76, 175, 80, 0.1);
+    box-shadow: 10px 10px 20px #0a0a0a,
+                -10px -10px 20px #303030;
+  }
+
+  .history-btn {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: #4CAF50;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+  }
+  
+  .history-btn:hover,
+  .history-btn:focus {
+    color: #66BB6A;
+  }
+  
+  .display-container {
+    background: rgba(10, 10, 10, 0.9);
+    border: 1px solid rgba(76, 175, 80, 0.1);
+    box-shadow: inset 0 0 10px rgba(76, 175, 80, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  
+  .previous-operation {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    min-height: 24px;
+    margin-bottom: 6px;
+    text-align: right;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .current-display {
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-align: right;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+  }
+  
+  .buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    flex-grow: 1;
+  }
+  
+  button {
+    border: none;
+    border-radius: 50%;
+    height: 60px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+ }
+
+  button:active {
+    transform: scale(0.92);
+    box-shadow: inset 2px 2px 5px #0a0a0a,
+                inset -2px -2px 5px #303030;
+ }
+
+  .function-btn {
+    background: linear-gradient(145deg, #323232, #282828);
+    color: #4CAF50;
+    box-shadow: 3px 3px 6px #0a0a0a,
+                -3px -3px 6px #303030;
+  }
+  
+  .function-btn:hover,
+  .function-btn:focus {
+    background-color: #3d3d3d;
+    outline: none;
+  }
+  
+  .operator-btn {
+    background: linear-gradient(145deg, #55c559, #45a549);
+    box-shadow: 3px 3px 6px #0a0a0a,
+                -3px -3px 6px #303030;
+    color: white
+  }
+  
+  .operator-btn:hover,
+  .operator-btn:focus {
+    background-color: #66BB6A;
+    outline: none;
+  }
+  
+  .number-btn {
+    background: linear-gradient(145deg, #222222, #181818);
+    box-shadow: 3px 3px 6px #0a0a0a,
+                -3px -3px 6px #303030;  
+    color: white;
+  }
+  
+  .number-btn:hover,
+  .number-btn:focus {
+    background-color: #2d2d2d;
+    outline: none;
+  }
+  
+  .zero-btn {
+    grid-column: span 2;
+    border-radius: 30px;
+    height: 60px;
+  }
+  
+  .equals-btn {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 50%;
+    height: 60px;
+    grid-column: 4 / 5;
+    grid-row: 5 / 6;
+  }
+  
+  .equals-btn:hover,
+  .equals-btn:focus {
+    background-color: #66BB6A;
+    outline: none;
+  }
+  
+  /* Modal styles */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+  
+  .modal[aria-hidden="false"] {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: #1a1a1a;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(76, 175, 80, 0.1);
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 360px;
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    color: #eee;
+    animation: modalFade 0.3s ease;
+  }
+  
+  @keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #2d2d2d;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  #close-history {
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: #4CAF50;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 6px;
+    line-height: 1;
+  }
+  
+  #close-history:hover,
+  #close-history:focus {
+    color: #66BB6A;
+    outline: none;
+  }
+  
+  .history-list {
+    padding: 12px 16px;
+    overflow-y: auto;
+    flex-grow: 1;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #0a0a0a;
+    border-bottom: 1px solid #2d2d2d;
+  }
+  
+  .modal-footer {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #111;
+  }
+  
+  #clear-history-btn {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+  
+  #clear-history-btn:hover,
+  #clear-history-btn:focus {
+    background-color: #66BB6A;
+    outline: none;
+  }
+  
